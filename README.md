@@ -75,5 +75,5 @@ The script creates two output files in the specified output directory:
 
 ## Post-Processing Results
 
-For advanced analysis of the results, including combining importance data with Weights & Biases trials to identify efficient hyperparameter ranges, check out [this Claude artifact](https://claude.ai/public/artifacts/e9d4fd9b-aefa-48ef-b115-85bc2ae3d628).
+For advanced analysis of the results, including combining importance data with Weights & Biases trials to identify efficient hyperparameter ranges, check out [this Claude artifact](https://claude.ai/public/artifacts/e9d4fd9b-aefa-48ef-b115-85bc2ae3d628?fullscreen=true).
 
