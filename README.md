@@ -66,6 +66,9 @@ python calc_hyperparameter_importance.py -s "your_study_name" --url "postgresql:
 | `--user` | `-u` | Database user |
 | `--password` | `-p` | Database password |
 | `--output-dir` | `-o` | Directory to save results |
+| `--n-trees` | | Number of trees for fANOVA analysis (default: 64) |
+| `--max-depth` | | Maximum depth for fANOVA analysis (default: 64) |
+| `--seed` | | Random seed for reproducibility (default: 42) |
 
 ## Output
 

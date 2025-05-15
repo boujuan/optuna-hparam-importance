@@ -58,6 +58,14 @@ def parse_arguments():
     db_group.add_argument('--password', '-p', dest='db_password', type=str,
                         help='Database password (required if --url is not provided)')
     
+    evaluator_group = parser.add_argument_group('Evaluator options')
+    evaluator_group.add_argument('--n-trees', dest='n_trees', type=int, default=64,
+                        help='Number of trees for fANOVA (default: 64)')
+    evaluator_group.add_argument('--max-depth', dest='max_depth', type=int, default=64,
+                        help='Maximum depth of trees for fANOVA (default: 64)')
+    evaluator_group.add_argument('--seed', dest='seed', type=int, default=42,
+                        help='Random seed for reproducibility (default: 42)')
+    
     # Output options
     parser.add_argument('--output-dir', '-o', dest='output_dir', type=str,
                         default="./results",
@@ -108,13 +116,17 @@ def load_optuna_study(args, logger):
         raise
 
 
-def calculate_importances(study, logger):
+def calculate_importances(study, logger, n_trees=64, max_depth=64, seed=42):
     """Calculate hyperparameter importances using fANOVA."""
     logger.info("Calculating hyperparameter importances using fANOVA...")
     
     try:
         # Use Optuna's FanovaImportanceEvaluator to calculate importances
-        evaluator = FanovaImportanceEvaluator()
+        evaluator = FanovaImportanceEvaluator(
+            n_trees=64,
+            max_depth=64,
+            seed=42
+        )
         importances = optuna.importance.get_param_importances(
             study=study,
             evaluator=evaluator
@@ -214,8 +226,8 @@ def main():
     study = load_optuna_study(args, logger)
     
     # Calculate importances
-    importances = calculate_importances(study, logger)
-    
+    importances = calculate_importances(study, logger, n_trees=args.n_trees, max_depth=args.max_depth, seed=args.seed)
+
     # Create and save the plot
     plot_importances(importances, plot_file, logger)
     
