@@ -123,9 +123,9 @@ def calculate_importances(study, logger, n_trees=64, max_depth=64, seed=42):
     try:
         # Use Optuna's FanovaImportanceEvaluator to calculate importances
         evaluator = FanovaImportanceEvaluator(
-            n_trees=64,
-            max_depth=64,
-            seed=42
+            n_trees=n_trees,
+            max_depth=max_depth,
+            seed=seed
         )
         importances = optuna.importance.get_param_importances(
             study=study,
